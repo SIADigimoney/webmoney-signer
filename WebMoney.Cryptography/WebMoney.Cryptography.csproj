@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <Version>4.1.0</Version>
+    <!-- Версия сборки остаётся 4.0.0.0: зависимые пакеты собраны против неё -->
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.1.0.0</FileVersion>
+    <Description>WebMoney message signing for RSA and v2 (Ed25519) keys. See: https://ru.webmoney.wiki/projects/webmoney/wiki/WMSignerFX</Description>
+    <Company>SIA Digimoney</Company>
+    <Authors>SIA Digimoney</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright (c) 2026 SIA Digimoney &lt;support@webmoney.com&gt;</Copyright>
+    <PackageLicenseExpression>(MIT)</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SIADigimoney/webmoney-signer</PackageProjectUrl>
+    <PackageTags>WebMoney,WMSigner,WMSignerFX,Ed25519</PackageTags>
+    <PackageReleaseNotes>RSA and v2 (Ed25519) keys</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/SIADigimoney/webmoney-signer</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- В .NET Framework cp1251 встроена; пакет нужен только для netstandard/.NET Core -->
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.11"
+                      Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <!-- Ed25519 для подписи v2 (Signer.Initialize(byte[] seed)) -->
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.7.0" />
+  </ItemGroup>
+
+</Project>
